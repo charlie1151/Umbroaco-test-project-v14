@@ -1,0 +1,13 @@
+﻿.main-content .section-wrapper.news-section .media-contacts {
+  border-top: solid 8px #333;
+  background-color: #d0d0d0;
+}
+.main-content .section-wrapper.news-section .social-media .bi-facebook {
+  color: #4267B2;
+}
+.main-content .section-wrapper.news-section .social-media .bi-twitter-x {
+  color: #000;
+}
+.main-content .section-wrapper.news-section .social-media .bi-linkedin {
+  color: #0072b1;
+}

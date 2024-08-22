@@ -1,0 +1,361 @@
+﻿@corpColor: #3BAAF8;
+@corpColorBtnHover: #3B94F8;
+@corpColorLinkHover: #3B75F8;
+@corpColor85: rgba(59, 170, 248, 0.85);
+
+* {
+    font-family: "微軟正黑體", "Source Sans Pro", "Roboto", Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased
+}
+
+/*TOP MENU*/
+.top-menu {
+    background-color: @corpColor;
+
+    .dropdown-menu {
+        z-index: 1030;
+
+        &::before {
+            content: "";
+            display: block;
+            border: 5px inset;
+            border-color: transparent transparent #fff;
+            border-bottom-style: solid;
+            z-index: 1030;
+            position: absolute;
+            height: 0;
+            width: 0;
+            top: -10px;
+            right: 54px;
+        }
+    }
+}
+/*TOP MENU END*/
+
+/*HEADER MENU*/
+.header-menu {
+    .navbar-toggler {
+        border: none;
+        padding: 0;
+        outline: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        .hamburger-toggle {
+            position: relative;
+            display: block;
+            width: 50px;
+            height: 50px;
+            z-index: 11;
+            float: right;
+
+            .hamburger {
+                position: absolute;
+                transform: translate(-50%, -50%) rotate(0deg);
+                left: 50%;
+                top: 50%;
+                width: 50%;
+                height: 50%;
+                pointer-events: none;
+
+                span {
+                    width: 100%;
+                    height: 4px;
+                    position: absolute;
+                    background: #fff;
+                    border-radius: 2px;
+                    z-index: 1;
+                    transition: transform 0.2s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.2s cubic-bezier(0.77, 0.2, 0.05, 1), all 0.2s ease-in-out;
+                    left: 0px;
+
+                    &:first-child {
+                        top: 10%;
+                        transform-origin: 50% 50%;
+                        transform: translate(0% -50%) !important;
+                    }
+
+                    &:nth-child(2) {
+                        top: 50%;
+                        transform: translate(0, -50%);
+                    }
+
+                    &:last-child {
+                        left: 0px;
+                        top: auto;
+                        bottom: 10%;
+                        transform-origin: 50% 50%;
+                    }
+                }
+
+                &.active {
+                    span {
+                        position: absolute;
+                        margin: 0;
+
+                        &:first-child {
+                            top: 45%;
+                            transform: rotate(45deg);
+                        }
+
+                        &:nth-child(2) {
+                            left: 50%;
+                            width: 0px;
+                        }
+
+                        &:last-child {
+                            top: 45%;
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #navbarContent {
+
+        .dropdown-menu {
+            &.dropdown-menu-dark {
+                z-index: 1025;
+            }
+        }
+
+        .dropend {
+            .dropdown-toggle {
+                &::after {
+                    position: absolute;
+                    right: 0.8em;
+                    top: 1.2em;
+                }
+            }
+
+            .dropdown-menu {
+                margin-left: -1px;
+                z-index: 1025;
+            }
+        }
+
+        a.dropdown-item {
+            padding: 0.8em;
+            border-bottom: 1px solid #313539;
+
+            &:hover {
+                background-color: @corpColor;
+            }
+        }
+
+        #megaProduct {
+
+            .nav-pills .nav-link.active {
+                background-color: @corpColor;
+            }
+
+            .tab-content {
+                h5 {
+                    &::before {
+                        font-family: 'bootstrap-icons';
+                        content: '\F231';
+                        position: relative;
+                        left: 0;
+                        top: 2px;
+                        margin-right: 5px;
+                        color: @corpColor;
+                    }
+                }
+
+                .col {
+                    margin-bottom: 1rem;
+
+                    a.nav-link {
+                        &:hover {
+                            background-color: @corpColor;
+                            border-radius: 6px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #searchBar {
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+}
+/*HEADER MENU END*/
+
+/*BOTTOM MENU*/
+.bottom-menu {
+    h5 a {
+        font-weight: 600;
+    }
+
+    a {
+        text-decoration: none;
+        color: #aaa;
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        margin: 1em auto;
+    }
+}
+/*BOTTOM MENU END*/
+
+/*FOOTER MENU*/
+.footer-menu {
+    background-color: @corpColor;
+    color: #fff;
+    line-height: 1.5em;
+    vertical-align: middle;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+
+        .bi {
+            font-size: 1.2em;
+        }
+    }
+}
+/*FOOTER MENU END*/
+
+/* SHARED COMPONENT */
+.btn {
+    &.btn-promise {
+        background-color: @corpColor;
+        color: #fff;
+        border-color: @corpColor;
+        padding-left: 3rem;
+        padding-right: 3rem;
+
+        &:hover {
+            background-color: @corpColorBtnHover;
+        }
+    }
+
+    &.btn-outline-promise {
+        color: @corpColor;
+        border-color: @corpColor;
+        padding-left: 3rem;
+        padding-right: 3rem;
+
+        &:hover {
+            background-color: @corpColor;
+            color: #fff;
+        }
+    }
+
+    &.btn-rounded {
+        border-radius: 2rem;
+    }
+}
+
+/* Media Query */
+//xs sm md
+@media (max-width: 991.98px) {
+    #searchBar {
+        display: none;
+    }
+
+    .main-content {
+        .section-wrapper {
+            h2 {
+                margin: 1.5rem 3rem;
+            }
+        }
+
+        .page-title {
+            .card-img {
+                height: 400px;
+                max-height: 400px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+        }
+    }
+}
+
+//md lg xl xxl
+@media (min-width: 768px) {
+    .main-content {
+        .section-wrapper {
+            .nav {
+                a {
+                    min-width: 230px;
+                    max-width: 230px;
+                }
+            }
+        }
+    }
+}
+
+//lg xl xxl
+@media (min-width: 992px) {
+    #megaProduct {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 62px;
+    }
+}
+
+.main-content {
+    .section-wrapper {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin: 1.5rem 15rem;
+        }
+
+        /*.nav {
+            margin-bottom: 1.5rem;
+
+            a {
+                color: #000;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 0.1em;
+                    background-color: @corpColor;
+                    opacity: 1;
+                    transform: scale(0);
+                    transform-origin: center;
+                    transition: opacity 300ms, transform 300ms;
+                }
+
+                &.active {
+                    &::after {
+                        transform: none;
+                    }
+                }
+
+                &:hover {
+                    &::after {
+                        transform: scale(1);
+                    }
+                }
+            }
+        }*/
+    }
+}

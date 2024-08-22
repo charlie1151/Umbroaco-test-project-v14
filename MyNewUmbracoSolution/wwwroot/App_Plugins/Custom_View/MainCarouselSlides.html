@@ -1,0 +1,11 @@
+﻿<section class="carouselSlide" ng-click="block.edit()">
+    <div class="content" style="padding: 0px; border: 1px solid #d8d7d9 ">
+        <div style="padding: 5px 5px 0 5px">
+            <strong>{{block.data.isEnable == 0 ? "[Disabled]": ""}}</strong> {{block.data.slideName}}
+        </div>
+        <div>
+            {{mediaItem = (block.data.imageForDesktop[0].mediaKey | mediaItemResolver); ""}}
+            <img ng-src="{{mediaItem.mediaLink}}" />
+        </div>
+    </div>
+</section>
