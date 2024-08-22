@@ -1,0 +1,49 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "master.cshtml";
+}
+<!--MAIN CONTENT-->
+<div class="main-content">
+	<!--PAGE TITLE-->
+	@{var banner = Model.Value<IPublishedContent>("Banner");}
+	<div class="page-title card border border-0">
+		<img class="card-img rounded-0" src="@banner.Url()" alt="hero" />
+		<div class="card-img-overlay d-flex justify-content-center align-items-center">
+			<h1 class="text-light">@Model.Value("bTitle")</h1>
+		</div>
+	</div>
+	<!--PAGE TITLE END-->
+	<article class="section-wrapper news-section px-3 px-lg-4">
+		<h1 class="text-center">@Model.Value("title1")</h1>
+        <h5 class="text-center">@Model.Value("subTitle")</h5>
+		<div class="row">
+			<div class="col-12 col-lg-9">
+				<div class="border rounded p-3 p-lg-4 mb-3">
+					@{var image = Model.Value<IPublishedContent>("Image");}
+						@if (image?.IsVisible() ?? false){
+						<img class="w-100 rounded" src="@image.Url()" />
+						}
+					@Model.Value("artical")
+				</div>
+			</div>
+			<div class="col-12 col-lg-3">
+				<div class="media-contacts p-4">
+					<h3 class="fw-bolder">新聞聯絡人</h3>
+					<p>
+						<span class="fw-bold">@Model.Value("department")</span>
+						<br />@Model.Value("WriterName")
+						<br /><a href="@Model.Value("gmail")">@Model.Value("gmail")</a>
+						<br />@Model.Value("phone")
+					</p>
+				</div>
+				<div class="social-media text-center py-4 fs-1">
+					<a href="#" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
+					<a href="#" title="Share on Twitter"><i class="bi bi-twitter"></i></a>
+					<a href="#" title="Share on LinkedIn"><i class="bi bi-linkedin"></i></a>
+				</div>
+			</div>
+		</div>
+	</article>
+</div>
+<!--MAIN CONTENT END-->

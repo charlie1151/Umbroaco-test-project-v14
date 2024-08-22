@@ -1,0 +1,121 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "master.cshtml";
+}
+
+<!--PAGE TITLE-->
+@{var banner = Model.Value<IPublishedContent>("Banner");}
+<div class="page-title card border border-0">
+	<img class="card-img rounded-0" src="@banner.Url()" alt="hero" />
+	<div class="card-img-overlay d-flex justify-content-center align-items-center">
+		<h1 class="text-light">@Model.Value("title")</h1>
+	</div>
+</div>
+<!--PAGE TITLE END-->
+@{
+    var newsArticles = Umbraco.Content(Guid.Parse("cebb1b43-3b2b-4de9-afb4-6c8410ed21d1"))
+        .Children()
+        .Where(x => x.IsVisible())
+        .OrderByDescending(x => x.CreateDate);
+}
+<div class="news-list">
+	@foreach (var article in newsArticles)
+	{
+		<div class="section-wrapper px-5 news-list">
+			<div class="news-item">
+				<div class="news-item row row-cols-lg-3 border-bottom mb-3 pb-3">
+					<div class="col-12 col-lg-1 text-uppercase fst-italic fs-3 p-2">
+					@if (article.HasValue("Date Picker"))
+					{
+						var publishDate = article.Value<DateOnly>("Date Picker");
+						<p>@publishDate.ToString("yyyy-MM-dd")</p>
+					}
+					else
+					{
+						<p>@article.CreateDate.ToString("yyyy-MM-dd")</p>
+					}
+					</div>
+					<div class="col-12 col-lg-9 flex-grow-1 p-2">
+						<h3 class="news-title pb-2"><a class="text-decoration-none text-secondary"
+						href="@article.Url()">@article.Name</a></h3>
+						@if (article.HasValue("Content"))
+						{
+							<p>@article.Value("Content")</p>
+						}
+					</div>
+					<div class="col-12 col-lg-2 p-2">
+						@if (article.HasValue("Image"))
+						{
+							var image = article.Value<IPublishedContent>("Image");
+							<img class="w-100 img-thumbnail" src="@image.Url()" alt="@article.Name" />
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+		@* <div class="news-item row row-cols-lg-3 border-bottom mb-3 pb-3">
+			<div class="col-12 col-lg-1 text-uppercase fst-italic fs-3 p-2">
+				2020 <br />jan 30
+			</div>
+			<div class="col-12 col-lg-9 flex-grow-1 p-2">
+				<h3 class="news-title pb-2"><a class="text-decoration-none text-secondary" href="#">喬鼎資訊Pegasus32
+						正式於Apple.com官網銷售</a></h3>
+				<p>
+					儲存設備大廠喬鼎資訊今日宣布旗下影音編輯儲存設備Pegasus32，今日起於全球的Apple.com官網銷售，
+					承續過去十年來與Apple良好的合作關係，Pegasus32可支援最新的macOS
+					Catalina，並提供去年新推出的Mac Pro最佳的外部儲存設備。
+				</p>
+			</div>
+		</div>
+
+		<div class="news-item row row-cols-lg-3 border-bottom mb-3 pb-3">
+			<div class="col-12 col-lg-1 text-uppercase fst-italic fs-3 p-2">
+				2020 <br /> dec 03
+			</div>
+			<div class="col-12 col-lg-9 flex-grow-1 p-2">
+				<h3 class="news-title pb-2"><a class="text-decoration-none text-secondary" href="#">配合Apple Mac
+						Pro上市 喬鼎資訊正式發售Pegasus R4i 暨Pegasus J2i 客製化內建儲存設備將提供最佳化效能滿足多媒體工作者專業需求</a></h3>
+				<p>
+					儲存設備大廠喬鼎資訊今日宣布正式發售旗下專為 Apple全新 Mac Pro 量身設計的儲存設備Pegasus R4i 暨 Pegasus
+					J2i。承續過去十年來與Apple良好的合作關係，Pegasus R4i 暨Pegasus J2i將搭配Mac Pro上市於
+					Apple.com熱銷，此外亦可在喬鼎資訊全球經銷通路購買。
+				</p>
+			</div>
+			<div class="col-12 col-lg-2 p-2">
+				<img class="w-100 img-thumbnail" src="./images/news/news-290-r4i-j2i-thumb.png" />
+			</div>
+		</div>
+
+		<div class="news-item row row-cols-lg-3 border-bottom mb-3 pb-3">
+			<div class="col-12 col-lg-1 text-uppercase fst-italic fs-3 p-2">
+				2020 <br />jan 30
+			</div>
+			<div class="col-12 col-lg-9 flex-grow-1 p-2">
+				<h3 class="news-title pb-2"><a class="text-decoration-none text-secondary"
+						href="#">喬鼎資訊發表最新全方位多媒體儲存解決方案驚艷IBC2019</a></h3>
+				<p>
+					儲存解決方案領導廠商喬鼎資訊（股票代碼 3057）將於9月13日至20日（週五~週二）參加在荷蘭阿姆斯特丹舉行的國際廣播電視影音大展IBC2019（攤位號碼5.A25），
+					現場展示喬鼎專為多媒體影音產業量身打造的全新儲存解決方案。IBC展覽每年於荷蘭阿姆斯特丹RAI會議中心舉辦，
+					今年吸納來自全球1700多家廠商，展現包括內容管理在內的各項影音工作流程所需的軟硬體設備。喬鼎期待藉由參與此一盛會，
+					展現喬鼎專為多媒體創意工作開發的最新儲存設備，同時將搭配影音編輯的應用軟體，為客戶呈現高效多元的影音檔案資料管理解決方案。
+				</p>
+			</div>
+		</div> *@
+	
+	<!--Pager-->
+	<nav aria-label="pagination">
+		<ul class="pagination justify-content-center">
+			<li class="page-item mx-1">
+				<a class="btn btn-promise ">載入更多...</a>
+			</li>
+		</ul>
+	</nav>
+	@* <div class="d-flex justify-content-center">
+	<button type="button" class="btn btn-promise ">了解更多</button>
+	</div>
+	*@
+	@* </div> *@
+	<!--MAIN CONTENT END-->

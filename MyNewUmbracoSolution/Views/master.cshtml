@@ -1,5 +1,407 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Services;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject ILocalizationService LocalizationService;
 @{
-	Layout = null;
+    Layout = null;
 }
+<!doctype html>
+<html lang="@System.Threading.Thread.CurrentThread.CurrentCulture.Name">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@Model.Value("metaDescription")">
+    <title>@Umbraco.GetDictionaryValueOrDefault("Common.PageTitle", "Promise Technology") @Model.Value("pageTitle")</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/libs/slick/slick.min.css" />
+    <link rel="stylesheet" href="/libs/slick/slick-theme.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="@Url.Content("~/css/myblockgridlayout.css")" />
+</head>
+@{
+    var solutionList = Umbraco.ContentAtRoot().FirstOrDefault()?.FirstChildOfType("solutionListPage");
+    var dictionaryItem = LocalizationService.GetDictionaryItemByKey("Language.Current");
+}
+<body class="@System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower()">
+    <!--TOP MENU-->
+    <nav class="top-menu py-1">
+        <div class="container-fluid d-flex flex-wrap">
+            <ul class="nav me-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link link-light dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-expanded="false"><i class="bi bi-globe"></i> TAIWAN | 正體中文</a>
+                    <ul class="dropdown-menu shadow rounded-0">
+                        <li><a class="dropdown-item link-dark" href="#">GLOBAL | ENGLISH</a></li>
+                        <li><a class="dropdown-item link-dark" href="#">NORTH AMERICA | ENGLISH</a></li>
+                        <li><a class="dropdown-item link-dark" href="#">TAIWAN | 正體中文</a></li>
+                        <li><a class="dropdown-item link-dark" href="#">CHINA | 简体中文</a></li>
+                        <li><a class="dropdown-item link-dark" href="#">JAPAN | 日本語</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav d-none d-lg-flex d-xl-flex d-xxl-flex">
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">關於喬鼎</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">技術支援</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">投資人關係</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">利害關係人</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>登入</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">
+                        <i class="bi bi-person-plus-fill me-2"></i>註冊</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--TOP MENU END-->
+    <!--HEADER MENU-->
+    <div class="header-menu sticky-lg-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a href="/" class="navbar-brand">
+                    <img src="@Umbraco.Media(Guid.Parse("c3b11892-7a71-4c2e-9f4d-8c7119eca3eb"))?.Url()" alt="Promise Logo" class="ps-3" />
+                </a>
+                <button title="navbar toggler" class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarContent">
+                    <div class="hamburger-toggle">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown position-static">
+                            <a id="productDropdown" class="nav-link dropdown-toggle link-light mx-3 text-uppercase fs-5" href="#"
+                                data-bs-toggle="dropdown" data-bs-auto-close="outside">產品資訊</a>
+                            <div id="megaProduct"
+                                class="dropdown-menu dropdown-menu-dark shadow rounded-0 m-0 border-0 p-2">
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 mb-3">
+                                        <ul class="nav nav-pills flex-lg-column">
+                                            <li class="nav-item col-6 col-lg-12 text-center">
+                                                <a class="nav-link link-light active" data-bs-toggle="tab"
+                                                    href="#productTab1">Pegasus</a>
+                                            </li>
+                                            <li class="nav-item col-6 col-lg-12 text-center">
+                                                <a class="nav-link link-light" data-bs-toggle="tab"
+                                                    href="#productTab2">SANLink</a>
+                                            </li>
+                                            <li class="nav-item col-6 col-lg-12 text-center">
+                                                <a class="nav-link link-light" data-bs-toggle="tab"
+                                                    href="#productTab3">Vess</a>
+                                            </li>
+                                            <li class="nav-item col-6 col-lg-12 text-center">
+                                                <a class="nav-link link-light" data-bs-toggle="tab"
+                                                    href="#productTab4">VTrak</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-lg-9">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="productTab1">
+                                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4">
+                                                    <div class="col">
+                                                        <h5>PegasusPro 系列</h5>
+                                                        <a href="#" class="nav-link link-light">PegasusPro R16</a>
+                                                        <a href="#" class="nav-link link-light">PegasusPro R8</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Pegasus J2i/R4i 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Pegasus J2i</a>
+                                                        <a href="#" class="nav-link link-light">Pegasus R4i</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Pegasus32 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Pegasus32 R4</a>
+                                                        <a href="#" class="nav-link link-light">Pegasus32 R6</a>
+                                                        <a href="#" class="nav-link link-light">Pegasus32 R8</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="productTab2">
+                                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4">
+                                                    <div class="col">
+                                                        <h5>SANLink3 系列</h5>
+                                                        <a href="#" class="nav-link link-light">SANLink3 N1</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="productTab3">
+                                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4">
+                                                    <div class="col">
+                                                        <h5>Vess A8000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess A8120</a>
+                                                        <a href="#" class="nav-link link-light">Vess A8020</a>
+                                                        <a href="#" class="nav-link link-light">Vess A8600 & A8800</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess R3000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess R3600is/R3600iD</a>
+                                                        <a href="#" class="nav-link link-light">Vess
+                                                            R3600xis/R3600xiD</a>
+                                                        <a href="#" class="nav-link link-light">Vess
+                                                            R3600fis/R3600fiD</a>
+                                                        <a href="#" class="nav-link link-light">Vess
+                                                            R3600tis/R3600tiD</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess J3000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess J3600sS</a>
+                                                        <a href="#" class="nav-link link-light">Vess J3600sD</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess A7000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess A7600</a>
+                                                        <a href="#" class="nav-link link-light">Vess A7800</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess A6000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess A6600</a>
+                                                        <a href="#" class="nav-link link-light">Vess A6800</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess A3120 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess A3120</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess A6120 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess A6120-AS</a>
+                                                        <a href="#" class="nav-link link-light">Vess A6120-MS</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess A3340 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess A3340</a>
+                                                        <a href="#" class="nav-link link-light">Vess A3340d</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess R2000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess R2600i</a>
+                                                        <a href="#" class="nav-link link-light">Vess R2600fi</a>
+                                                        <a href="#" class="nav-link link-light">Vess R2600ti</a>
+                                                        <a href="#" class="nav-link link-light">Vess R2600xi</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>Vess J2000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">Vess J2600s</a>
+                                                        <a href="#" class="nav-link link-light">Vess J2610s</a>
+                                                        <a href="#" class="nav-link link-light">Vess J2810s</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="productTab4">
+                                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4">
+                                                    <div class="col">
+                                                        <h5>VTrak N 系列</h5>
+                                                        <a href="#" class="nav-link link-light">VTrak N1008</a>
+                                                        <a href="#" class="nav-link link-light">VTrak N1616</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>VTrak J5960 系列</h5>
+                                                        <a href="#" class="nav-link link-light">VTrak J5960</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>VTrak D5000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">VTrak D5300</a>
+                                                        <a href="#" class="nav-link link-light">VTrak D5320</a>
+                                                        <a href="#" class="nav-link link-light">VTrak D5600</a>
+                                                        <a href="#" class="nav-link link-light">VTrak D5800</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>VTrak E5000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">VTrak E5300f</a>
+                                                        <a href="#" class="nav-link link-light">VTrak E5600f</a>
+                                                        <a href="#" class="nav-link link-light">VTrak E5800f</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>VTrak J5000 系列</h5>
+                                                        <a href="#" class="nav-link link-light">VTrak J5320s</a>
+                                                        <a href="#" class="nav-link link-light">VTrak J5300s</a>
+                                                        <a href="#" class="nav-link link-light">VTrak J5600s</a>
+                                                        <a href="#" class="nav-link link-light">VTrak J5800s</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5>VTrak Jx30 系列</h5>
+                                                        <a href="#" class="nav-link link-light">VTrak J930s</a>
+                                                        <a href="#" class="nav-link link-light">VTrak J830s</a>
+                                                        <a href="#" class="nav-link link-light">VTrak J630s</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle link-light mx-3 text-uppercase fs-5" href="#"
+                                data-bs-toggle="dropdown" data-bs-auto-close="outside">解決方案</a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow rounded-0">
+                                <li><a class="dropdown-item" href="#">IT</a></li>
+                                <li><a class="dropdown-item" href="#">多媒體</a></li>
+                                <li><a class="dropdown-item" href="#">監控系統</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item d-lg-none">
+                            <a class="nav-link link-light mx-3 text-uppercase fs-5" href="#">技術支援</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-light mx-3 text-uppercase fs-5" href="#">經銷資訊</a>
+                        </li>
+                        <li class="nav-item d-none d-lg-flex">
+                            <a title="search" class="nav-link link-light mx-3 text-uppercase fs-5" href="#"
+                                data-bs-toggle="collapse" data-bs-target="#searchBar">
+                                <i class="bi bi-search"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item d-lg-none">
+                            <a class="nav-link link-light mx-3 text-uppercase fs-5" href="#">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>登入</a>
+                        </li>
+                        <li class="nav-item d-lg-none">
+                            <a class="nav-link link-light mx-3 text-uppercase fs-5" href="#">
+                                <i class="bi bi-person-plus-fill me-2"></i>註冊</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex d-lg-none" role="search">
+                        <input class="form-control me-2" type="search" placeholder="搜尋" aria-label="Search">
+                        <button class="btn btn-outline-promise" type="submit">搜尋</button>
+                    </form>
+                </div>
+
+            </div>
+        </nav>
+        <!-- DESKTOP SEARCH -->
+        <div class="collapse shadow" id="searchBar">
+            <div class="card card-body rounded-0 border-start-0 border-end-0 text-center">
+                <form class="row justify-content-md-center">
+                    <div class="col col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="@Umbraco.GetDictionaryValueOrDefault(" Master.Search", "Search" )" aria-label="@Umbraco.GetDictionaryValueOrDefault("Master.Search", "Search")"
+                                   aria-describedby="button-desktop-search">
+                            <button class="btn btn-outline-promise" type="submit" id="button-desktop-search">@Umbraco.GetDictionaryValueOrDefault("Master.Search", "Search")</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--HEADER MENU END-->
+
+
+
+
+
+    <!--MAIN CONTENT-->
+    <div class="main-content">
+        @RenderBody()
+    </div>
+    <!--MAIN CONTENT END-->
+
+
+
+
+
+    <!--BOTTOM MENU-->
+    <nav class="bottom-menu bg-dark p-3 pt-5 pb-5">
+        <div class="row">
+            <div class="col-6 col-lg">
+                <h5><a href="#" class="link-light">解決方案</a></h5>
+                <ul>
+                    <li><a href="#">IT</a></li>
+                    <li><a href="#">多媒體</a></li>
+                    <li><a href="#">監控系統</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg">
+                <h5><a href="product-list.html" class="link-light">產品資訊</a></h5>
+                <ul>
+                    <li><a href="#">Pegasus</a></li>
+                    <li><a href="#">SANLink</a></li>
+                    <li><a href="#">Vess</a></li>
+                    <li><a href="#">VTrak</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg">
+                <h5><a href="#" class="link-light">技術支援</a></h5>
+                <ul>
+                    <li><a href="#">下載中心</a></li>
+                    <li><a href="#">知識庫</a></li>
+                    <li><a href="#">技術討論板</a></li>
+                    <li><a href="#">e-Support & RMA</a></li>
+                    <li><a href="#">訓練與認證</a></li>
+                    <li><a href="#">產品註冊</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg">
+                <h5><a href="#" class="link-light">經銷資訊</a></h5>
+            </div>
+            <div class="col-6 col-lg">
+                <h5><a href="#" class="link-light">最新消息</a></h5>
+                <ul>
+                    @{
+                        var linkedPage = Umbraco.Content("cebb1b43-3b2b-4de9-afb4-6c8410ed21d1");
+                    }
+                    <li><a href="@linkedPage.Url()">新聞專區</a></li>
+                    <li><a href="#">活動行事曆</a></li>
+                    <li><a href="#">成功案例</a></li>
+                    <li><a href="#">得獎紀錄</a></li>
+                    <li><a href="#">產品評測</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg">
+                <h5><a href="#" class="link-light">關於喬鼎</a></h5>
+                <ul>
+                    <li><a href="#">公司簡介</a></li>
+                    <li><a href="#">里程碑</a></li>
+                    <li><a href="#">聯絡我們</a></li>
+                    <li class="d-lg-none"><a href="#">投資人關係</a></li>
+                    <li class="d-lg-none"><a href="#">利害關係人</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg">
+                <h5><a href="#" class="link-light">人才招募</a></h5>
+                <ul>
+                    <li><a href="#">選擇喬鼎</a></li>
+                    <li><a href="#">薪資福利</a></li>
+                    <li><a href="#">工作與生活</a></li>
+                    <li><a href="#">加入喬鼎</a></li>
+                    <li><a href="#">如何前往</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--BOTTOM MENU END-->
+    <!--FOOTER MENU-->
+    <footer class="footer-menu container-fluid">
+        <div class="row row-cols-1 row-cols-lg-2 pt-4 pb-4 text-center">
+            <div class="col-lg-8 col-xl-9 text-lg-start">
+                Copyright ©2022 PROMISE Technology Inc. 版權所有.
+                <a href="#" class="link-light">服務條款</a>
+                /
+                <a href="#" class="link-light">隱私權政策</a>
+            </div>
+            <div class="col-lg-4 col-xl-3 text-lg-end text-uppercase">
+                follow
+                <a title="LinkedIn" href="http://www.linkedin.com/company/promise-technology"
+                    class="link-light me-2 ms-2"><i class="bi bi-linkedin "></i></a>
+                <a title="Facebook" href="https://www.facebook.com/PromiseTW" class="link-light me-2"><i
+                        class="bi bi-facebook"></i></a>
+                <a title="Twitter" href="https://twitter.com/PROMISE_STORAGE" class="link-light me-2"><i
+                        class="bi bi-twitter"></i></a>
+                <a title="YouTube" href="https://www.youtube.com/user/PromiseTechnology" class="link-light me-2"><i
+                        class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!--FOOTER MENU END-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="/libs/slick/slick.min.js"></script>
+    <script src="/scripts/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

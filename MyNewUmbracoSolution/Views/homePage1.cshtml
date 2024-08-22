@@ -1,75 +1,263 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = null;
+    Layout = "master.cshtml";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Example</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
+<!---CAROUSEL--->
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+            aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+            aria-label="Slide 5"></button>
     </div>
-  </nav>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/images/Homebanner/2024/banner_D5000_J5960_notext.jpg"
+                class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block text-black">
+                <h1 style="line-height: 550px;">當乙太網路<b>25GB</b>遇見<font color="green">GREENBOOST</font>技術</h1>
+                <h2>VTrak 5000和 V Trak5960</h2>
+                <button type="button" class="btn btn-primary">了解更多</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/Web%20Public%20Media/V4/Products/Pegasus/PegasusR12/pegasus_r12_banner2.jpg"
+                class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <button type="button" class="btn btn-primary">了解更多</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/images/Homebanner/2022/A6000/hero-home-banner-1920x650-A6000.jpg"
+                class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <button type="button" class="btn btn-primary">了解更多</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/images/Homebanner/2023/PromiseRAID-index-banner1920x-650.jpg"
+                class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <button type="button" class="btn btn-primary">了解更多</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/images/Homebanner/2022/PegasusM4/Pegasus%20M4%20index%20banner_TC.jpg"
+                class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <button type="button" class="btn btn-primary">了解更多</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/images/Homebanner/2022/VTrak-N-Series/VTrak%20N1616%20index%20banner%201920_650%202.jpg"
+                class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <button type="button" class="btn btn-primary">了解更多</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!---CAROUSEL END--->
 
-  <!-- Main Content -->
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col">
-        <h1>Welcome to my Bootstrap Page</h1>
-            @Model.Value("bodyText")
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <h2>Section 1</h2>
-        <p>Content for section 1 goes here.</p>
-      </div>
-      <div class="col">
-        <h2>Section 2</h2>
-        <p>Content for section 2 goes here.</p>
-      </div>
-    </div>
-  </div>
+<!---ADVANTAGE--->
 
-  <!-- Footer -->
-  <footer class="footer mt-auto py-3 bg-light">
+
+@{
+    var image1 = Model.Value<IPublishedContent>("Image1");
+    var image2 = Model.Value<IPublishedContent>("Image2");
+    var image3 = Model.Value<IPublishedContent>("Image3");
+}
+
+        
+<section id="about" class="py-5">
     <div class="container">
-        @Model.Value("footerText")
+        <h1 class="text-center mb-4">喬鼎的優勢</h1>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@image1.Url()" alt="@image1.Name" />
+                    @* <img src="https://www.promise.com/FileCruiser/MediaBank/Web%20Public%20Media/V5/Index/Advantage/promiseraid395x240.jpg"
+                        class="card-img-top" alt="牛肉麵"> *@
+                    <div class="card-body">
+                        @Model.Value("lecture1")
+                        <a href="#">了解更多</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@image2.Url()" alt="@image2.Name" />
+                    @* <img src="https://www.promise.com/FileCruiser/MediaBank/Web%20Public%20Media/V5/Index/Advantage/surveillanceboostd.jpg"
+                        class="card-img-top" alt="小籠包"> *@
+                    <div class="card-img-overlay text-white d-flex justify-content-center align-items-center">
+                        <div class="text-center">
+                            <h2 class="card-title">專為監控設計<br>的<br>Boost增強技術<br><br><br><br><br></h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @Model.Value("lecture2")
+                        <a href="#">了解更多</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@image3.Url()" alt="@image3.Name" />
+                    @* <img src="https://www.promise.com/FileCruiser/MediaBank/Web%20Public%20Media/V5/Index/Advantage/richmediaboost.jpg"
+                        class="card-img-top" alt="臭豆腐"> *@
+                    <div class="card-img-overlay text-white d-flex justify-content-center align-items-center">
+                        <div class="text-center">
+                            <h2 class="card-title">專為多媒體設計<br>的<br>Boost增強技術<br><br><br><br><br></h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @Model.Value("lecture3")
+                        <a href="#">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
+    <table style="width: 100%;">
+        <tr style=" vertical-align: middle; text-align: center;">
+            <td>
+                <button type="button" class="btn btn-primary">BOOST增強技術總攬</button>
+            </td>
+        </tr>
+    </table>
+</section>
+<!---ADVANTAGE END--->
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <!-- Popper.js, 如果使用 Bootstrap 4.5+，Popper.js 已內建在 Bootstrap JavaScript 中 -->
-  <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<!--SUCCESS STORY-->
+<div class="container">
 
+    <h1 class="text-center">成功案例</h1>
+    
+    <ul class="nav nav-tabs justify-content-center" id="caseStudyTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="multimedia-tab" data-toggle="tab" href="#multimedia" role="tab" aria-controls="multimedia" aria-selected="true">多媒體</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="surveillance-tab" data-toggle="tab" href="#surveillance" role="tab" aria-controls="surveillance" aria-selected="false">監控系統</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="it-tab" data-toggle="tab" href="#it" role="tab" aria-controls="it" aria-selected="false">IT</a>
+        </li>
+    </ul>
+    @* <h1 class="text-center my-4">成功案例</h1>
+    <nav class="nav flex-column flex-md-row justify-content-md-center">
+        <a class="nav-link active flex-md-fill text-center position-relative p-md-4 p-2" type="button"
+            data-bs-toggle="tab" data-bs-target="#successStoryTabPane1">多媒體</a>
+        <a class="nav-link flex-md-fill text-center position-relative p-md-4 p-2" type="button" data-bs-toggle="tab"
+            data-bs-target="#successStoryTabPane2">監控系統</a>
+        <a class="nav-link flex-md-fill text-center position-relative p-md-4 p-2" type="button" data-bs-toggle="tab"
+            data-bs-target="#successStoryTabPane3">IT</a>
+    </nav> *@
+    <div class="case-slider">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://www.promise.com/FileCruiser/MediaBank/Case_Study/2022/DVV/20220success%20story_case%20study_DVV1.png"
+                        class="card-img-top" alt="DVV">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-end">
+                        <p class="card-title text-white text-center">多媒體產業成功案例: DVV</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://www.promise.com/FileCruiser/MediaBank/NewsRoom/casestudy/2021/home-case-study--Xtrem--Productions.png"
+                        class="card-img-top" alt="XTREM PRODUCTIONS">
+                    <div class="card-img-overlay d-flex align-items-end">
+                        <p class="card-title text-white text-center">多媒體產業成功案例: XTREM PRODUCTIONS</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://www.promise.com/FileCruiser/MediaBank/NewsRoom/casestudy/2021/home-case-study-Streets-Ahead.png"
+                        class="card-img-top" alt="STREETS AHEAD PRODUCTIONS">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-end">
+                        <p class="card-title text-white text-center">多媒體產業成功案例: STREETS AHEAD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#" role="button">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#" role="button">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+<!--SUCCESS STORY END-->
+
+<div class="container text-center my-5">
+    <h1 class="mb-4">合作夥伴</h1>
+    <p class="mb-5">作為儲存解決方案的領導品牌，喬鼎資訊與許多優秀的夥伴合作，提供客戶最佳解決方案。</p>
+
+    <div class="scroll-container">
+        <div class="scroll-content">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/partner/partnerlogo_adobe_250.png" alt="ATTO"
+                class="partner-logo">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/partner/partnerlogo_aimetis_250.png" alt="Autodesk"
+                class="partner-logo">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/partner/partnerlogo_AJA_250.png" alt="Avid"
+                class="partner-logo">
+            <img src="https://www.promise.com/FileCruiser/MediaBank/partner/partnerlogo_archiware_250.png"
+                alt="Axis Communications" class="partner-logo">
+            <!-- 可以繼續添加更多的合作夥伴logo -->
+        </div>
+    </div>
+</div>
+<!--TECH SUPPORT-->
+<section id="supportSection" class="section-wrapper">
+    <h1 class="text-center">技術支援</h1>
+    <div class="row ms-2 me-2 mt-5 ms-lg-5 me-lg-5">
+        <div class="col text-center">
+            <a href="#" target="_self" class="nav-link">
+                <img alt="聯絡我們"
+                    src="https://www.promise.com/FileCruiser/MediaBank/Web Public Media/V4/Solutions/icon-contact us.svg">
+                <h5>聯絡我們</h5>
+            </a>
+        </div>
+        <div class="col text-center">
+            <a rel="noopener" href="#" target="_blank" class="nav-link">
+                <img alt="Surveillance Planner"
+                    src="https://www.promise.com/FileCruiser/MediaBank/Web Public Media/V4/Solutions/icon-surveillance.svg">
+                <h5>Surveillance Planner</h5>
+            </a>
+        </div>
+        <div class="col text-center">
+            <a rel="noopener" href="https://support.promise.com/" target="_blank" class="nav-link">
+                <img alt="eSupport &amp; RMA"
+                    src="https://www.promise.com/FileCruiser/MediaBank/Web Public Media/V4/Solutions/icon-rma2.svg">
+                <h5>eSupport &amp; RMA</h5>
+            </a>
+        </div>
+        <div class="col text-center">
+            <a href="#" target="_self" class="nav-link">
+                <img alt="下載中心"
+                    src="https://www.promise.com/FileCruiser/MediaBank/Web Public Media/V4/Solutions/icon-download-center.svg">
+                <h5>下載中心</h5>
+            </a>
+        </div>
+        <div class="col text-center">
+            <a rel="noopener" href="https://support.promise.com/Registration/" target="_blank" class="nav-link">
+                <img alt="產品註冊"
+                    src="https://www.promise.com/FileCruiser/MediaBank/Web Public Media/V4/Solutions/icon-register.svg">
+                <h5>產品註冊</h5>
+            </a>
+        </div>
+    </div>
+</section>
+<!--TECH SUPPORT END-->
